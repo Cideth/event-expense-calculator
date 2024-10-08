@@ -1,11 +1,6 @@
 "use client";
 import { Navbar, Container } from "react-bootstrap";
-import {
-  usePathname,
-  useRouter,
-  useSelectedLayoutSegment,
-} from "next/navigation";
-import { Metadata } from "next";
+import { usePathname, useRouter } from "next/navigation";
 /*
   1. 로그인 하기 전에는 footer가 표시되면 안됨
   2. 로그인 한 이후

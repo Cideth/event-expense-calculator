@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import FriendsPage from "./layout";
-import Layout from "@/components/Layout";
+import FriendsPage from "./FriendsPage";
+
 export const metadata: Metadata = {
   title: "친구 목록",
   description: "친구 목록을 표시합니다.",
@@ -9,9 +9,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <Layout>
-        <FriendsPage />
-      </Layout>
+      <FriendsPage />
     </>
   );
 }
