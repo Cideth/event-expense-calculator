@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Container, Image } from "react-bootstrap";
 export default function LoginPage() {
   return (
@@ -69,7 +70,7 @@ export default function LoginPage() {
           </button>
           <div className="mb-3 text-center">
             <label>
-              아이디가 없으신가요? <a href="">회원가입</a>
+              아이디가 없으신가요? <Link href="/signup">회원가입</Link>
             </label>
           </div>
         </form>

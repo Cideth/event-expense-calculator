@@ -1,10 +1,23 @@
+"use client";
 import { useState } from "react";
 import Link from "next/link";
 import { Navbar, Container, Nav } from "react-bootstrap";
+import { usePathname } from "next/navigation";
 type TabType = "friends" | "gatherings" | "setting";
 
 export default function FooterLayout() {
+  const pathname = usePathname();
   const [activeTab, setActiveTab] = useState<TabType>("friends");
+
+  const excludedRegex = /^\/gatherings\/\d+$/;
+  const excludedList = ["/login"];
+  console.log(pathname);
+  if (excludedList.includes(pathname) || excludedRegex.test(pathname)) {
+    console.log("no footer");
+    return null;
+  } else {
+    console.log("yes footer");
+  }
 
   const handleTabClick = (tab: TabType) => {
     setActiveTab(tab);

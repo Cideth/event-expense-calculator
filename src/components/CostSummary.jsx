@@ -3,7 +3,7 @@ import { Row, Col, Card } from "react-bootstrap";
 
 export default function CostSummary() {
   return (
-    <Card className="m-3 shadow-sm">
+    <Card className=" shadow-sm">
       <Card.Body>
         <Row>
           <Col>

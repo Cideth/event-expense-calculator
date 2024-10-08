@@ -1,10 +1,16 @@
 "use client";
 import { ListGroup } from "react-bootstrap";
 
-export default function TimelineItem({ icon, text, time }) {
+export default function TimelineItem({ icon, text, time, event }) {
   return (
-    <ListGroup.Item className="d-flex align-items-start">
-      <div className="bg-primary text-white p-2 mt-1 rounded-circle me-3">
+    <ListGroup.Item
+      onClick={(e) => {
+        if (!event) return;
+        return event(e);
+      }}
+      className="d-flex align-items-start mb-1"
+    >
+      <div className="bg-primary text-white p-3 rounded-circle me-3">
         {icon}
       </div>
       <div>

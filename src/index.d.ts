@@ -4,9 +4,18 @@ export interface Friend {
   image: string | null;
   name: string;
 }
+export interface FriendShip extends Friend {
+  myFreinds: Friend[];
+}
 export type FriendList = Friend[];
 
 export type roomStatusType = "wait" | "start" | "end";
+
+// Flag 코드 컬럼
+// A 학생, B는 선생
+
+// A 타입을 받았다 -> 클라이언트에서는 Typescript로 어떻게 처리를 하는게 좋을까
+// 마지막 Notificate 의 타입에 따라서 화면에 표시되어야 할게 달라짐.
 
 export enum GatheringNotificationEnum {
   Attendance = "Meeting Attendance",
@@ -24,6 +33,6 @@ export interface Gathering {
   image: string | null;
   roomName: string;
   participants: FriendList | [];
-  lastNotificate?: GatheringNotificationEnum;
+  lastNotificate: GatheringNotificationEnum;
 }
 export type GatheringList = Gathering[];
