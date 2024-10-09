@@ -38,6 +38,6 @@ export interface Gathering {
 export type GatheringList = Gathering[];
 
 export type HeaderLayoutStateType = {
-  readonly title?: string;
-  readonly backButtonUrlLink?: string;
+  title?: string;
+  backButtonUrlLink?: string | null;
 };
