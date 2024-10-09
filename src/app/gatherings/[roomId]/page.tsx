@@ -1,10 +1,21 @@
+"use client";
 import { Container, ListGroup } from "react-bootstrap";
 import GatherActionButtons from "@/components/GatherActionButtons";
 import CostSummary from "@/components/CostSummary";
 import TimelineItem from "@/components/TimelineItem";
 import { FaMapPin, FaDollarSign, FaUsers } from "react-icons/fa";
+import { useSetRecoilState } from "recoil";
+import { headerLayoutState } from "@/state/atom";
+import { HeaderLayoutStateType } from "@/index";
+
+const headerLayoutStateInitValue: HeaderLayoutStateType = {
+  backButtonUrlLink: "/gatherings",
+};
 
 export default function CreatePage() {
+  const setHeaderLayoutState = useSetRecoilState(headerLayoutState);
+
+  setHeaderLayoutState({ ...headerLayoutStateInitValue, title: "test" });
   return (
     <>
       <Container

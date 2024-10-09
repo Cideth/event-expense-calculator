@@ -2,7 +2,9 @@
 import { Container, Image } from "react-bootstrap";
 import { Gathering, GatheringList, GatheringNotificationEnum } from "@/index";
 import { useRouter } from "next/navigation";
-
+import { useSetRecoilState } from "recoil";
+import { HeaderLayoutStateType } from "@/index";
+import { headerLayoutState } from "@/state/atom";
 const testFriendData: GatheringList = [
   {
     roomId: "10",
@@ -14,7 +16,13 @@ const testFriendData: GatheringList = [
   },
 ];
 
+const headerLayoutStateInitValue: HeaderLayoutStateType = {
+  title: "모임 목록",
+};
+
 export default function CreatePage() {
+  const setHeaderLayoutState = useSetRecoilState(headerLayoutState);
+  setHeaderLayoutState(headerLayoutStateInitValue);
   const router = useRouter();
   return (
     <Container fluid="xxl" className="p-0">

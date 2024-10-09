@@ -2,12 +2,6 @@
 import { Container, Image } from "react-bootstrap";
 import { FriendList, Friend } from "@/index";
 import { useRouter } from "next/navigation";
-// import type { Metadata } from "next";
-
-// export const metadata: Metadata = {
-//   title: "친구목록",
-//   description: "친구목록 표시",
-// };
 
 const testFriendData: FriendList = [
   {
@@ -26,7 +20,7 @@ const testFriendData: FriendList = [
 
 export default function FriendsPage() {
   const router = useRouter();
-  let isClicked: NodeJS.Timeout;
+
   return (
     <Container fluid="xxl" className="p-0">
       <div

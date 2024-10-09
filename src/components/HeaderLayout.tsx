@@ -3,6 +3,8 @@ import { Navbar, Container } from "react-bootstrap";
 import { usePathname, useRouter } from "next/navigation";
 import { useRecoilValue } from "recoil";
 import { headerLayoutState } from "@/state/atom";
+import { HeaderLayoutStateType } from "..";
+import Link from "next/link";
 /*
   1. 로그인 하기 전에는 footer가 표시되면 안됨
   2. 로그인 한 이후
@@ -22,35 +24,29 @@ import { headerLayoutState } from "@/state/atom";
 */
 
 export default function HeaderLayout() {
-  const {title, backButtonUrlLink} = useRecoilValue(headerLayoutState); 
-  const router = useRouter();
-  const excludeBackbuttonPathRegex = /^\/[^\/]+\/[^\/?]+.*$/;
-  const pathname = usePathname();
-  const showBackButton = excludeBackbuttonPathRegex.test(pathname);
-
-  console.log(`Show Back Button: ${showBackButton}`);
+  const { title, backButtonUrlLink } =
+    useRecoilValue<HeaderLayoutStateType>(headerLayoutState);
 
   return (
     <Navbar bg="primary" variant="dark" className="position-sticky top-0 z-3 ">
       <Container className="justify-content-start mx-1">
-        {showBackButton && (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1.5em"
-            height="1.5em"
-            viewBox="0 0 24 24"
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              router.back();
-            }}
-          >
-            <path
-              fill="#ffffff"
-              d="M12.727 3.687a1 1 0 1 0-1.454-1.374l-8.5 9a1 1 0 0 0 0 1.374l8.5 9.001a1 1 0 1 0 1.454-1.373L4.875 12z"
-            />
-          </svg>
+        {backButtonUrlLink && (
+          <Link href={backButtonUrlLink}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1.5em"
+              height="1.5em"
+              viewBox="0 0 24 24"
+              style={{ cursor: "pointer" }}
+            >
+              <path
+                fill="#ffffff"
+                d="M12.727 3.687a1 1 0 1 0-1.454-1.374l-8.5 9a1 1 0 0 0 0 1.374l8.5 9.001a1 1 0 1 0 1.454-1.373L4.875 12z"
+              />
+            </svg>
+          </Link>
         )}
-        <Navbar.Brand>{"모임 정산 앱"}</Navbar.Brand>
+        <Navbar.Brand>{title}</Navbar.Brand>
         {/* if 경로가 뭐다 -> 무슨 컴포넌트 추가 */}
       </Container>
     </Navbar>
