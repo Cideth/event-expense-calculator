@@ -36,3 +36,8 @@ export interface Gathering {
   lastNotificate: GatheringNotificationEnum;
 }
 export type GatheringList = Gathering[];
+
+export type HeaderLayoutStateType = {
+  readonly title?: string;
+  readonly backButtonUrlLink?: string;
+};
