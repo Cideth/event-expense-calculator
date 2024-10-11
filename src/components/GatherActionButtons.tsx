@@ -1,8 +1,17 @@
 "use client";
 import { Card, Button } from "react-bootstrap";
-import { FaMapPin, FaDollarSign, FaUsers, FaPlus } from "react-icons/fa";
+import {
+  FaMapPin,
+  FaDollarSign,
+  FaUsers,
+  FaPlus,
+  FaQuestion,
+} from "react-icons/fa";
 import { useState } from "react";
-
+import { BiSolidDrink } from "react-icons/bi";
+import { MdOutlineNoDrinks } from "react-icons/md";
+import { timeLineEvents } from "@/app/gatherings/[roomId]/page";
+import { RoomStatus, TimeLineEventType } from "..";
 const colors = [
   "bg-red-200",
   "bg-blue-200",
@@ -12,32 +21,29 @@ const colors = [
   "bg-pink-200",
 ];
 
-export const managerActionsButtonArr = [
-  {
-    icon: <FaDollarSign size="1.5em" />,
-    text: "test",
-  },
-  {
-    icon: <FaDollarSign size="1.5em" />,
-    text: "test2",
-  },
-  {
-    icon: <FaDollarSign size="1.5em" />,
-    text: "test3",
-  },
-  {
-    icon: <FaDollarSign size="1.5em" />,
-    text: "test4",
-  },
-  {
-    icon: <FaDollarSign size="1.5em" />,
-    text: "test5",
-  },
-];
+const managerActionsButtonArr: { [key in RoomStatus]: TimeLineEventType[] } = {
+  wait: [
+    "GATHER_START", // 모임 시작
+    "PLACE_CHANGE", // 장소 변경
+    "COST_ADD", // 전체 비용 추가 (기본료, 장소 대여비 등)
+    "PLACE_ADD",
+    "PLACE_ATTEND",
+    "PLACE_CHANGE",
+  ],
+  start: [
+    "GATHER_END", // 모임 종료
+    "PLACE_MOVE", // 장소 이동
+    "PLACE_ADD",
+    "PLACE_ATTEND",
+    "PLACE_CHANGE",
+    "COST_ADD", // 비용 추가
+  ],
+  end: ["SETTLEMENT_CONFIRM"],
+};
 
 export default function GatherActionButtons() {
   const [isExpanded, setExpandedButton] = useState(false);
-  const buttonsArr = managerActionsButtonArr;
+  const buttonsArr = managerActionsButtonArr.wait;
   {
     /*
             1. 모임장이 볼 수 있는 버튼
@@ -127,8 +133,8 @@ export default function GatherActionButtons() {
           transition: "max-height 0.3s ease-in-out",
         }}
       >
-        {buttonsArr.map((row) => (
-          <QuickActionButton key={row.text} icon={row.icon} text={row.text} />
+        {buttonsArr.map((event_type, index) => (
+          <ActionButtonFactory event_type={event_type} key={index} />
         ))}
       </Card.Body>
     </div>
@@ -143,3 +149,26 @@ const QuickActionButton = ({ icon, text }) => (
     <div className="small">{text}</div>
   </div>
 );
+
+function ActionButtonFactory({ event_type, event }: any) {
+  console.log(event_type);
+  const eventItem = timeLineEvents.find((item) => item.type === event_type);
+
+  if (eventItem) {
+    return (
+      <QuickActionButton
+        icon={eventItem.icon}
+        text={eventItem.message || eventItem.message}
+      />
+    );
+  }
+
+  // Default case for unknown event types
+  console.error(`Unknown event type: ${event_type}`);
+  return (
+    <QuickActionButton
+      icon={<FaQuestion size="1.5em" />}
+      text={"알 수 없는 이벤트"}
+    />
+  );
+}

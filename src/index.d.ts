@@ -10,6 +10,21 @@ export interface FriendShip extends Friend {
 export type FriendList = Friend[];
 
 type RoomStatus = "start" | "wait" | "end";
+
+type TimeLineEventType =
+  | "GATHER_START"
+  | "GATHER_END"
+  | "DRINKING"
+  | "NO_DRINKING"
+  | "PLACE_MOVE"
+  | "PLACE_CHANGE"
+  | "PLACE_ATTEND"
+  | "PLACE_ADD"
+  | "ROOM_ENTER"
+  | "ROOM_EXIT"
+  | "COST_ADD"
+  | "PLACE_DELETE"
+  | "SETTLEMENT_CONFIRM";
 // Flag 코드 컬럼
 // A 학생, B는 선생
 
