@@ -9,8 +9,7 @@ export interface FriendShip extends Friend {
 }
 export type FriendList = Friend[];
 
-export type roomStatusType = "wait" | "start" | "end";
-
+type RoomStatus = "start" | "wait" | "end";
 // Flag 코드 컬럼
 // A 학생, B는 선생
 
