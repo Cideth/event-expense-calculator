@@ -13,10 +13,8 @@ export default function FooterLayout() {
   const excludedList = ["/login"];
   console.log(pathname);
   if (excludedList.includes(pathname) || excludedRegex.test(pathname)) {
-    console.log("no footer");
     return null;
   } else {
-    console.log("yes footer");
   }
 
   const handleTabClick = (tab: TabType) => {
