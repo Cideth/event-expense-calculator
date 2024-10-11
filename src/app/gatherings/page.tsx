@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useSetRecoilState } from "recoil";
 import { HeaderLayoutStateType } from "@/index";
 import { headerLayoutState } from "@/state/atom";
+import { useEffect } from "react";
 const testFriendData: GatheringList = [
   {
     roomId: "10",
@@ -20,9 +21,11 @@ const headerLayoutStateInitValue: HeaderLayoutStateType = {
   title: "모임 목록",
 };
 
-export default function CreatePage() {
+export default function Page() {
   const setHeaderLayoutState = useSetRecoilState(headerLayoutState);
-  setHeaderLayoutState(headerLayoutStateInitValue);
+  useEffect(() => {
+    setHeaderLayoutState(headerLayoutStateInitValue);
+  }, []);
   const router = useRouter();
   return (
     <Container fluid="xxl" className="p-0">
