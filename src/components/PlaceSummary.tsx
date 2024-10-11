@@ -8,6 +8,8 @@ type PlaceSummaryType = {
   previousPlace?: string;
   currentPlace: string;
   nextPlace?: string;
+  startTime?: string;
+  endTime?: string;
 };
 
 const getStatusColor = (status: RoomStatus) => {
@@ -37,6 +39,8 @@ export default function HorizontalPlaceSummary({
   previousPlace,
   currentPlace,
   nextPlace,
+  startTime,
+  endTime,
 }: PlaceSummaryType) {
   return (
     <Card className="shadow-sm">
@@ -57,7 +61,7 @@ export default function HorizontalPlaceSummary({
           {previousPlace && <ArrowRight className="mx-2" size={24} />}
           <div className="text-center">
             <div className="small text-primary font-weight-bold mb-1">
-              현재 장소
+              {roomStatus === "wait" ? "모이는" : "현재"} 장소
             </div>
             <div className="font-weight-bold border border-primary rounded px-3 py-2">
               {currentPlace}
@@ -70,6 +74,9 @@ export default function HorizontalPlaceSummary({
               <div>{nextPlace}</div>
             </div>
           )}
+        </div>
+        <div>
+          모임 시작 : {startTime} / 종료 예정 : {endTime}
         </div>
       </Card.Body>
     </Card>
