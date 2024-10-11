@@ -8,3 +8,8 @@ export const headerLayoutState = atom<HeaderLayoutStateType>({
     backButtonUrlLink: null,
   },
 });
+
+export const sidebarState = atom<boolean>({
+  key: "sidebarState",
+  default: false,
+});

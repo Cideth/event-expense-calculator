@@ -1,10 +1,12 @@
 "use client";
-import { Navbar, Container } from "react-bootstrap";
+import { Navbar, Container, Button } from "react-bootstrap";
 import { usePathname, useRouter } from "next/navigation";
-import { useRecoilValue } from "recoil";
-import { headerLayoutState } from "@/state/atom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { headerLayoutState, sidebarState } from "@/state/atom";
 import { HeaderLayoutStateType } from "..";
 import Link from "next/link";
+import { IoIosMenu } from "react-icons/io";
+import GatherRoomSlidingSidebar from "../app/gatherings/[roomId]/SlidingSidebar";
 /*
   1. 로그인 하기 전에는 footer가 표시되면 안됨
   2. 로그인 한 이후
@@ -22,32 +24,41 @@ import Link from "next/link";
 
 
 */
+const extendCompoentList = [
+  {
+    path: "/friends",
+    component: null,
+  },
+];
 
 export default function HeaderLayout() {
-  const { title, backButtonUrlLink } =
+  const { title, backButtonUrlLink, additionalComponent } =
     useRecoilValue<HeaderLayoutStateType>(headerLayoutState);
 
   return (
-    <Navbar bg="primary" variant="dark" className="position-sticky top-0 z-3 ">
-      <Container className="justify-content-start mx-1">
-        {backButtonUrlLink && (
-          <Link href={backButtonUrlLink}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="1.5em"
-              height="1.5em"
-              viewBox="0 0 24 24"
-              style={{ cursor: "pointer" }}
-            >
-              <path
-                fill="#ffffff"
-                d="M12.727 3.687a1 1 0 1 0-1.454-1.374l-8.5 9a1 1 0 0 0 0 1.374l8.5 9.001a1 1 0 1 0 1.454-1.373L4.875 12z"
-              />
-            </svg>
-          </Link>
-        )}
-        <Navbar.Brand>{title}</Navbar.Brand>
-        {/* if 경로가 뭐다 -> 무슨 컴포넌트 추가 */}
+    <Navbar bg="primary" variant="dark" className="position-sticky top-0 z-3">
+      <Container fluid className="d-flex justify-content-between mx-1">
+        <div className="d-flex align-items-center">
+          {backButtonUrlLink && (
+            <Link href={backButtonUrlLink} passHref>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.5em"
+                height="1.5em"
+                viewBox="0 0 24 24"
+                style={{ cursor: "pointer" }}
+              >
+                <path
+                  fill="#ffffff"
+                  d="M12.727 3.687a1 1 0 1 0-1.454-1.374l-8.5 9a1 1 0 0 0 0 1.374l8.5 9.001a1 1 0 1 0 1.454-1.373L4.875 12z"
+                />
+              </svg>
+            </Link>
+          )}
+          <Navbar.Brand className="ms-2">{title}</Navbar.Brand>
+        </div>
+        {/* 우측 정렬된 추가 버튼을 위한 공간 */}
+        {additionalComponent}
       </Container>
     </Navbar>
   );
