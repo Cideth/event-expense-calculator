@@ -1,15 +1,16 @@
 import React from "react";
 import { Card, Badge } from "react-bootstrap";
 import { ArrowRight } from "lucide-react";
+import { RoomStatus } from "..";
 
 type PlaceSummaryType = {
-  roomStatus: "start" | "wait" | "end";
+  roomStatus: RoomStatus;
   previousPlace?: string;
   currentPlace: string;
   nextPlace?: string;
 };
 
-const getStatusColor = (status: "start" | "wait" | "end") => {
+const getStatusColor = (status: RoomStatus) => {
   switch (status) {
     case "start":
       return "success";
@@ -20,7 +21,7 @@ const getStatusColor = (status: "start" | "wait" | "end") => {
   }
 };
 
-const getStatusText = (status: "start" | "wait" | "end") => {
+const getStatusText = (status: RoomStatus) => {
   switch (status) {
     case "start":
       return "진행 중";
