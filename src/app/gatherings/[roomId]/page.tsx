@@ -1,18 +1,16 @@
 "use client";
-import { Container, ListGroup } from "react-bootstrap";
+import { Button, Container, ListGroup } from "react-bootstrap";
 import GatherActionButtons from "@/components/GatherActionButtons";
-import CostSummary from "@/components/CostSummary";
 import TimelineItem from "@/components/TimelineItem";
 import { FaMapPin, FaDollarSign, FaUsers } from "react-icons/fa";
 import { useSetRecoilState } from "recoil";
-import { headerLayoutState } from "@/state/atom";
+import { headerLayoutState, sidebarState } from "@/state/atom";
 import { HeaderLayoutStateType } from "@/index";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import PlaceSummary from "@/components/PlaceSummary";
-
-const headerLayoutStateInitValue: HeaderLayoutStateType = {
-  backButtonUrlLink: "/gatherings",
-};
+import { IoIosMenu } from "react-icons/io";
+import GatherUserList from "./GatherUserList";
+import GatherStartItem from "@/components/timeline/GatherStartItem";
 
 const testTimeLineData = [
   {
@@ -49,9 +47,20 @@ const testTimeLineData = [
 
 export default function CreatePage() {
   const setHeaderLayoutState = useSetRecoilState(headerLayoutState);
+  const setSidebarState = useSetRecoilState(sidebarState);
   useEffect(() => {
-    setHeaderLayoutState({ ...headerLayoutStateInitValue, title: "test" });
-  }, []);
+    // 페이지가 로드되었을 때 헤더 상태 설정
+    setHeaderLayoutState({
+      backButtonUrlLink: "/gatherings",
+      title: "test",
+      additionalComponent: <GatherUserList />,
+    });
+
+    // 페이지를 벗어나거나 언마운트될 때 사이드바 상태 초기화
+    return () => {
+      setSidebarState(false);
+    };
+  }, [setHeaderLayoutState, setSidebarState]); // 의존성 배열에 상태 설정 함수 추가
 
   return (
     <>
@@ -59,6 +68,9 @@ export default function CreatePage() {
         fluid="xxl"
         className="p-0 flex-grow-1 d-flex flex-column"
         style={{ height: "calc(100dvh - 58px)" }}
+        onClick={() => {
+          setSidebarState(false);
+        }}
       >
         <PlaceSummary
           nextPlace="PC방"
