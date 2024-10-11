@@ -1,7 +1,17 @@
 "use client";
 import { ListGroup } from "react-bootstrap";
+import { IconTimelineItemProps } from "..";
 
-export default function TimelineItem({ icon, text, time, event }) {
+interface TimelineItemProps extends IconTimelineItemProps {
+  icon: React.ReactNode;
+}
+
+export default function TimelineItem({
+  icon,
+  text,
+  time,
+  event,
+}: TimelineItemProps) {
   return (
     <ListGroup.Item
       onClick={(e) => {

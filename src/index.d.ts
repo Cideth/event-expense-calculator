@@ -39,4 +39,12 @@ export type GatheringList = Gathering[];
 export type HeaderLayoutStateType = {
   title?: string;
   backButtonUrlLink?: string | null;
+  additionalComponent?: React.ReactNode | null;
+  additionalComponentProps?: Record<string, any>;
 };
+
+interface IconTimelineItemProps {
+  text: string;
+  time: string;
+  event?: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
+}
