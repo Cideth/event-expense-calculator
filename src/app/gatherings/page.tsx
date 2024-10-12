@@ -1,6 +1,6 @@
 "use client";
 import { Container, Image } from "react-bootstrap";
-import { Gathering, GatheringList, GatheringNotificationEnum } from "@/index";
+import { Gathering, GatheringList } from "@/index";
 import { useRouter } from "next/navigation";
 import { useSetRecoilState } from "recoil";
 import { HeaderLayoutStateType } from "@/index";
