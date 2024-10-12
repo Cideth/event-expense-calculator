@@ -24,7 +24,11 @@ type TimeLineEventType =
   | "ROOM_EXIT"
   | "COST_ADD"
   | "PLACE_DELETE"
-  | "SETTLEMENT_CONFIRM";
+  | "SETTLEMENT_CONFIRM"
+  | "COST_REMOVE"
+  | "COST_CHANGE"  
+
+  ;
 // Flag 코드 컬럼
 // A 학생, B는 선생
 

@@ -27,9 +27,10 @@ import {
 } from "react-icons/md";
 import { PiSneakerMoveFill } from "react-icons/pi";
 import { IoEnterOutline, IoExit } from "react-icons/io5";
-import { RiUserLocationLine } from "react-icons/ri";
+import { RiExchangeDollarLine, RiUserLocationLine } from "react-icons/ri";
 import { GiConfirmed } from "react-icons/gi";
 import { testTimeLineData } from "./testdata";
+import { TbCurrencyDollarOff } from "react-icons/tb";
 
 export default function CreatePage({
   timelineData,
@@ -190,4 +191,16 @@ export const timeLineEvents: Array<{
     message: "정산 확정",
     icon: <GiConfirmed size="1.5em" />,
   },
+  { 
+    type : "COST_REMOVE",
+    message: "비용 삭제",
+    icon : <TbCurrencyDollarOff size="1.5em"/>
+  },
+  {
+    type :"COST_CHANGE",
+    message:  "비용 변경",
+    icon :  <RiExchangeDollarLine size="1.5em" />
+
+  }
+
 ];
