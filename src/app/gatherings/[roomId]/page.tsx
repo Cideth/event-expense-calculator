@@ -27,7 +27,7 @@ import {
 } from "react-icons/md";
 import { PiSneakerMoveFill } from "react-icons/pi";
 import { IoEnterOutline, IoExit } from "react-icons/io5";
-import { RiExchangeDollarLine, RiUserLocationLine } from "react-icons/ri";
+import { RiExchangeDollarLine, RiUserLocationLine, RiUserUnfollowLine } from "react-icons/ri";
 import { GiConfirmed } from "react-icons/gi";
 import { testTimeLineData } from "./testdata";
 import { TbCurrencyDollarOff } from "react-icons/tb";
@@ -105,7 +105,7 @@ function TimelineItemFactory({
   text,
   time,
   event,
-}: TimelineItemProps) {
+}: TimelineItemProps) : JSX.Element {
   const eventItem = timeLineEvents.find((item) => item.type === event_type);
 
   if (eventItem) {
@@ -161,9 +161,14 @@ export const timeLineEvents: Array<{
     icon: <MdOutlineShareLocation size="1.5em" />,
   },
   {
-    type: "PLACE_ATTEND",
-    message: "장소 참석",
+    type: "CHECK_IN",
+    message: "체크인",
     icon: <RiUserLocationLine size="1.5em" />,
+  },
+  {
+    type: "CHECK_OUT",
+    message: "체크아웃",
+    icon: <RiUserUnfollowLine  size="1.5em" />,
   },
   {
     type: "PLACE_ADD",

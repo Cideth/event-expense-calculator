@@ -18,7 +18,8 @@ type TimeLineEventType =
   | "NO_DRINKING"
   | "PLACE_MOVE"
   | "PLACE_CHANGE"
-  | "PLACE_ATTEND"
+  | "CHECK_IN"
+  | "CHECK_OUT"
   | "PLACE_ADD"
   | "ROOM_ENTER"
   | "ROOM_EXIT"
@@ -27,8 +28,10 @@ type TimeLineEventType =
   | "SETTLEMENT_CONFIRM"
   | "COST_REMOVE"
   | "COST_CHANGE"  
-
   ;
+
+
+
 // Flag 코드 컬럼
 // A 학생, B는 선생
 
