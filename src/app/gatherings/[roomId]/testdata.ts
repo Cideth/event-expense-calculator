@@ -62,7 +62,7 @@ export const testTimeLineData: Array<TimelineItemProps> = [
     event: { from: "홍대", to: "이태원" },
   },
   {
-    event_type: "PLACE_ATTEND",
+    event_type: "CHECK_IN",
     text: "장소 참석: 사용자 C",
     time: "22:15",
     event: { place: "이태원" },
