@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { HeaderLayoutStateType } from "..";
+import { HeaderLayoutStateType, ModalConfig } from "..";
 
 export const headerLayoutState = atom<HeaderLayoutStateType>({
   key: "headerLayoutState",
@@ -12,4 +12,14 @@ export const headerLayoutState = atom<HeaderLayoutStateType>({
 export const sidebarState = atom<boolean>({
   key: "sidebarState",
   default: false,
+});
+
+export const simpleModalState = atom<ModalConfig>({
+  key: "simpleModalState",
+  default: {
+    isOpen: false,
+    message: "",
+    onConfirm: () => {},
+    onCancel: () => {},
+  },
 });

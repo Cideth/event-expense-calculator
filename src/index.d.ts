@@ -27,10 +27,7 @@ type TimeLineEventType =
   | "PLACE_DELETE"
   | "SETTLEMENT_CONFIRM"
   | "COST_REMOVE"
-  | "COST_CHANGE"  
-  ;
-
-
+  | "COST_CHANGE";
 
 // Flag 코드 컬럼
 // A 학생, B는 선생
@@ -69,4 +66,11 @@ interface IconTimelineItemProps {
   text: string;
   time: string;
   event?: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
+}
+
+interface ModalConfig {
+  isOpen: boolean;
+  message: string;
+  onConfirm: () => void;
+  onCancel: () => void;
 }
