@@ -1,24 +1,16 @@
 "use client";
-import { Button, Container, ListGroup } from "react-bootstrap";
 import GatherActionButtons from "@/components/GatherActionButtons";
-import TimelineItem from "@/components/TimelineItem";
-import {
-  FaMapPin,
-  FaDollarSign,
-  FaUsers,
-  FaQuestion,
-  FaPowerOff,
-} from "react-icons/fa";
-import { useSetRecoilState } from "recoil";
-import { headerLayoutState, sidebarState } from "@/state/atom";
-import { HeaderLayoutStateType, TimeLineEventType } from "@/index";
-import { useEffect, useRef, useState } from "react";
 import PlaceSummary from "@/components/PlaceSummary";
-import { IoIosMenu } from "react-icons/io";
-import GatherUserList from "./GatherUserList";
-import GatherStartItem from "@/components/timeline/GatherStartItem";
-import { LuPartyPopper } from "react-icons/lu";
+import TimelineItem from "@/components/TimelineItem";
+import { TimeLineEventType } from "@/index";
+import { headerLayoutState, sidebarState } from "@/state/atom";
+import { useEffect, useRef } from "react";
+import { Container } from "react-bootstrap";
 import { BiSolidDrink } from "react-icons/bi";
+import { FaDollarSign, FaPowerOff, FaQuestion } from "react-icons/fa";
+import { GiConfirmed } from "react-icons/gi";
+import { IoEnterOutline, IoExit } from "react-icons/io5";
+import { LuPartyPopper } from "react-icons/lu";
 import {
   MdAddLocationAlt,
   MdOutlineNoDrinks,
@@ -26,10 +18,15 @@ import {
   MdWrongLocation,
 } from "react-icons/md";
 import { PiSneakerMoveFill } from "react-icons/pi";
-import { IoEnterOutline, IoExit } from "react-icons/io5";
-import { RiExchangeDollarLine, RiUserLocationLine, RiUserUnfollowLine } from "react-icons/ri";
-import { GiConfirmed } from "react-icons/gi";
-import { testTimeLineData } from "./testdata";
+import {
+  RiExchangeDollarLine,
+  RiUserLocationLine,
+  RiUserUnfollowLine,
+} from "react-icons/ri";
+import { useSetRecoilState } from "recoil";
+import GatherUserList from "./GatherUserList";
+import { setActionButtonSettingData, testTimeLineData } from "./testdata";
+
 import { TbCurrencyDollarOff } from "react-icons/tb";
 
 export default function CreatePage({
@@ -44,6 +41,7 @@ export default function CreatePage({
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+  const actionButtonSettingData = setActionButtonSettingData;
 
   useEffect(() => {
     // 페이지가 로드되었을 때 헤더 상태 설정
@@ -87,7 +85,12 @@ export default function CreatePage({
           </div>
         </div>
 
-        <GatherActionButtons />
+        <GatherActionButtons
+          isCheckedIn={actionButtonSettingData.isCheckedIn}
+          isHost={actionButtonSettingData.isHost}
+          isDrinking={actionButtonSettingData.isDrinking}
+          roomStatus={actionButtonSettingData.roomStatus}
+        />
       </Container>
     </>
   );
@@ -105,7 +108,7 @@ function TimelineItemFactory({
   text,
   time,
   event,
-}: TimelineItemProps) : JSX.Element {
+}: TimelineItemProps): JSX.Element {
   const eventItem = timeLineEvents.find((item) => item.type === event_type);
 
   if (eventItem) {
@@ -168,7 +171,7 @@ export const timeLineEvents: Array<{
   {
     type: "CHECK_OUT",
     message: "체크아웃",
-    icon: <RiUserUnfollowLine  size="1.5em" />,
+    icon: <RiUserUnfollowLine size="1.5em" />,
   },
   {
     type: "PLACE_ADD",
@@ -196,16 +199,14 @@ export const timeLineEvents: Array<{
     message: "정산 확정",
     icon: <GiConfirmed size="1.5em" />,
   },
-  { 
-    type : "COST_REMOVE",
+  {
+    type: "COST_REMOVE",
     message: "비용 삭제",
-    icon : <TbCurrencyDollarOff size="1.5em"/>
+    icon: <TbCurrencyDollarOff size="1.5em" />,
   },
   {
-    type :"COST_CHANGE",
-    message:  "비용 변경",
-    icon :  <RiExchangeDollarLine size="1.5em" />
-
-  }
-
+    type: "COST_CHANGE",
+    message: "비용 변경",
+    icon: <RiExchangeDollarLine size="1.5em" />,
+  },
 ];
