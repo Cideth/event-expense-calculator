@@ -6,12 +6,17 @@ import {
   FaUsers,
   FaPlus,
   FaQuestion,
+  FaPowerOff,
+  FaSignInAlt,
+  FaSignOutAlt,
 } from "react-icons/fa";
 import { useState } from "react";
 import { BiSolidDrink } from "react-icons/bi";
 import { MdOutlineNoDrinks } from "react-icons/md";
 import { timeLineEvents } from "@/app/gatherings/[roomId]/page";
 import { RoomStatus, TimeLineEventType } from "..";
+import { RiUserLocationLine, RiUserUnfollowLine } from "react-icons/ri";
+
 const colors = [
   "bg-red-200",
   "bg-blue-200",
@@ -21,29 +26,67 @@ const colors = [
   "bg-pink-200",
 ];
 
-const managerActionsButtonArr: { [key in RoomStatus]: TimeLineEventType[] } = {
-  wait: [
-    "GATHER_START", // 모임 시작
-    "PLACE_CHANGE", // 장소 변경
-    "COST_ADD", // 전체 비용 추가 (기본료, 장소 대여비 등)
-    "PLACE_ADD",
-    "PLACE_ATTEND",
-    "PLACE_CHANGE",
-  ],
-  start: [
-    "GATHER_END", // 모임 종료
-    "PLACE_MOVE", // 장소 이동
-    "PLACE_ADD",
-    "PLACE_ATTEND",
-    "PLACE_CHANGE",
-    "COST_ADD", // 비용 추가
-  ],
-  end: ["SETTLEMENT_CONFIRM"],
+type ActionButtonType =
+  | "GATHER_START"
+  | "PLACE_EDIT"
+  | "COST_EDIT"
+  | "CHECK_IN_OUT"
+  | "SETTLEMENT_CHECK"
+  | "GETHER_END"
+  | "DRINKING_YES_NO";
+
+const actionButtons: {
+  [key in ActionButtonType]: { icon: JSX.Element; label: string };
+} = {
+  GATHER_START: { icon: <FaPlus />, label: "모임 시작" },
+  PLACE_EDIT: { icon: <FaMapPin />, label: "장소 편집" },
+  COST_EDIT: { icon: <FaDollarSign />, label: "비용 편집" },
+  CHECK_IN_OUT: { icon: <FaUsers />, label: "모임 참석" },
+  SETTLEMENT_CHECK: { icon: <FaDollarSign />, label: "비용 확인" },
+  GETHER_END: { icon: <FaPowerOff />, label: "모임 종료" },
+  DRINKING_YES_NO : { icon: <BiSolidDrink />, label: "����� 여부" }
 };
 
-export default function GatherActionButtons() {
+const hostActionButtonsInfo: { [key in RoomStatus]: ActionButtonType[] } = {
+  wait: [
+    "GATHER_START", // 모임 시작
+    "COST_EDIT",
+    "PLACE_EDIT",
+  ],
+  start: [
+    "GETHER_END", // 모임 종료
+    "PLACE_EDIT", // 장소 관리
+    "COST_EDIT",// 비용 관리
+  ],
+  end: ["SETTLEMENT_CHECK"],
+};
+
+const attendeeActionButtonsInfo : { [key in RoomStatus]: ActionButtonType[] } = {
+  wait: [
+    "CHECK_IN_OUT",
+  ],
+  start: [
+    "GETHER_END", // 모임 종료
+    "PLACE_EDIT", // 장소 이동
+    "CHECK_IN_OUT",
+  ],
+  end: ["SETTLEMENT_CHECK"],
+};
+
+// gatheractionbuttons props = RoomStatus, IsAttendPlace, IsAdmin
+type GatherActionbuttonProps = {
+  roomStatus: RoomStatus;
+  isAttendPlace: boolean;
+  isHost: boolean;
+};
+
+export default function GatherActionButtons({
+  roomStatus,
+  isAttendPlace,
+  isHost,
+}: GatherActionbuttonProps) {
   const [isExpanded, setExpandedButton] = useState(false);
-  const buttonsArr = managerActionsButtonArr.wait;
+  const buttonsArr = managerActionsButtonInfo.wait;
   {
     /*
             1. 모임장이 볼 수 있는 버튼
@@ -141,7 +184,37 @@ export default function GatherActionButtons() {
   );
 }
 
-const QuickActionButton = ({ icon, text }) => (
+function getCheckInOutButton(isCheckedIn: boolean): { icon: JSX.Element; label: string } {
+  return isCheckedIn
+    ? { icon: <RiUserUnfollowLine />, label: "체크아웃" } 
+    : { icon: <RiUserLocationLine />, label: "체크인" };
+}
+function getDrinkYesNoButton(isDrinking: boolean): { icon: JSX.Element; label: string } {
+  return isDrinking
+    ? { icon: <BiSolidDrink />, label: "금주" }  
+    : { icon: <MdOutlineNoDrinks />, label: "음주" };
+}
+
+function getActionHandler(event_type: ActionButtonType, isHost: boolean, isAttendPlace: boolean) {
+  const eventItem = timeLineEvents.find((item) => item.type === event_type);
+
+  if (eventItem) {
+    if (isHost) {
+      return eventItem.hostHandler;
+    } else if (isAttendPlace) {
+      return eventItem.attendeePlaceHandler;
+    } else {
+      return eventItem.attendeeHandler;
+    }
+  }
+
+  // Default case for unknown event types
+  console.error(`Unknown event type: ${event_type}`);
+  return null;
+}
+
+
+function QuickActionButton({ icon, text }) => (
   <div className="col-4 col-sm-3  p-1 text-center ">
     <Button variant="outline-secondary" className="rounded-circle p-3 mb-2">
       {icon}
