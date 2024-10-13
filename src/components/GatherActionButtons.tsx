@@ -87,7 +87,10 @@ export default function GatherActionButtons({
   };
 
   return (
-    <div className="px-3 pb-3 border rounded-top">
+    <div
+      className="px-3 pb-3 border rounded-top"
+      style={{ paddingTop: isShowExpandedButton ? "0px" : "10px" }}
+    >
       {isShowExpandedButton && (
         <div
           className="text-center py-1 "
@@ -116,7 +119,7 @@ export default function GatherActionButtons({
       <Card.Body
         className={`row ${isExpanded ? "" : "overflow-hidden"}`}
         style={{
-          maxHeight: isExpanded ? "1000px" : "88.789px",
+          maxHeight: isExpanded ? "1000px" : "95px",
           transition: "max-height 0.3s ease-in-out",
         }}
       >
