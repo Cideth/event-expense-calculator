@@ -3,9 +3,27 @@ import { TimelineItemProps } from "./page";
 import { GatherActionbuttonProps } from "@/components/GatherActionButtons";
 
 export const userListTestData = [
-  { name: "User 1", id: "user1", profile: "San Francisco", state: "start" },
-  { name: "User 2", id: "user2", profile: "New York", state: "wait" },
-  { name: "User 3", id: "user3", profile: "Seattle", state: "start" },
+  {
+    name: "User 1",
+    id: "user1",
+    profile: "San Francisco",
+    state: "start",
+    isDrinking: true,
+  },
+  {
+    name: "User 2",
+    id: "user2",
+    profile: "New York",
+    state: "wait",
+    isDrinking: false,
+  },
+  {
+    name: "User 3",
+    id: "user3",
+    profile: "Seattle",
+    state: "start",
+    isDrinking: true,
+  },
 ];
 export const testTimeLineData: Array<TimelineItemProps> = [
   {
@@ -88,3 +106,5 @@ export const setActionButtonSettingData: GatherActionbuttonProps = {
   roomStatus: "start",
   isHost: true,
 };
+
+export const roomIdPageTestData = {};
