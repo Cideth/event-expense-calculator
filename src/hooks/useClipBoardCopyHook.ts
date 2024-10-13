@@ -1,7 +1,4 @@
 import { useCallback } from "react";
-export const u = (a: (me: string) => void) => {
-  return;
-};
 
 // Custom hook에서 상태를 주입받는 구조로 변경
 export const useClipBoardCopyHook = (
