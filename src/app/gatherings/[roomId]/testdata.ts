@@ -1,5 +1,6 @@
 import { Friend, FriendList, FriendShip } from "@/index";
 import { TimelineItemProps } from "./page";
+import { GatherActionbuttonProps } from "@/components/GatherActionButtons";
 
 export const userListTestData = [
   { name: "User 1", id: "user1", profile: "San Francisco", state: "start" },
@@ -80,3 +81,10 @@ export const testTimeLineData: Array<TimelineItemProps> = [
     event: { deletedPlace: "강남 카페" },
   },
 ];
+
+export const setActionButtonSettingData: GatherActionbuttonProps = {
+  isCheckedIn: true,
+  isDrinking: true,
+  roomStatus: "start",
+  isHost: true,
+};
