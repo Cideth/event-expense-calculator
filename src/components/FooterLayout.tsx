@@ -46,7 +46,7 @@ export default function FooterLayout() {
               active={activeTab === "setting"}
               onClick={() => handleTabClick("setting")}
             >
-              설정
+              지원 및 정보
             </Nav.Link>
           </Link>
         </Nav>
