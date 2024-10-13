@@ -9,8 +9,8 @@ export default function FooterLayout() {
   const pathname = usePathname();
   const [activeTab, setActiveTab] = useState<TabType>("friends");
 
-  const excludedRegex = /^\/gatherings\/\d+$/;
-  const excludedList = ["/login"];
+  const excludedRegex = /^\/gatherings\/\d+(.*)/;
+  const excludedList = ["/login", "/signup"];
   console.log(pathname);
   if (excludedList.includes(pathname) || excludedRegex.test(pathname)) {
     return null;
