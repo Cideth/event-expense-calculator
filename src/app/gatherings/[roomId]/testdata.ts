@@ -1,6 +1,6 @@
 import { Friend, FriendList, FriendShip } from "@/index";
-import { TimelineItemProps } from "./page";
 import { GatherActionbuttonProps } from "@/components/GatherActionButtons";
+import { TimelineItemProps } from "./GatheringRoomPage";
 
 export const userListTestData = [
   {
