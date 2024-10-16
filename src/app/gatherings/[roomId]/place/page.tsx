@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import PlacePage from "./PlacePage";
 
 export const metadata: Metadata = {
   title: "장소 추가/수정",
@@ -6,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <></>;
+  return (
+    <>
+      <PlacePage />
+    </>
+  );
 }
