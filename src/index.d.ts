@@ -51,7 +51,7 @@ export interface Gathering {
   image: string | null;
   roomName: string;
   participants: FriendList | [];
-  lastNotificate: GatheringNotificationEnum;
+  lastNotificate: TimeLineEventType;
 }
 export type GatheringList = Gathering[];
 
