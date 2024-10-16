@@ -13,7 +13,7 @@ const testFriendData: GatheringList = [
     image: "",
     roomName: "술후딱먹고헤어지는방",
     participants: [],
-    lastNotificate: null,
+    lastNotificate: "CHECK_IN",
   },
 ];
 

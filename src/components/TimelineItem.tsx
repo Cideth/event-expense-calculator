@@ -13,13 +13,7 @@ export default function TimelineItem({
   event,
 }: TimelineItemProps) {
   return (
-    <ListGroup.Item
-      onClick={(e) => {
-        if (!event) return;
-        return event(e);
-      }}
-      className="d-flex align-items-start mb-1"
-    >
+    <ListGroup.Item className="d-flex align-items-start mb-1">
       <div className="bg-primary text-white p-3 rounded-circle me-3">
         {icon}
       </div>
