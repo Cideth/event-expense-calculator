@@ -59,6 +59,9 @@ export default function PlacePage() {
     setPlaceName("");
   };
 
+  const hadleRemove = (id: string) => {
+    setPlaces((prev) => prev.filter((place) => place.id !== id));
+  };
   const onDragEnd = (result: any) => {
     const isVisitedDestination = result.destination.index;
 
@@ -134,7 +137,14 @@ export default function PlacePage() {
                         순서 {index + 1}
                       </span>
                       {place.placeName}
-                      <Button disabled={place.isVisited}>삭제</Button>
+                      <Button
+                        onClick={() => {
+                          hadleRemove(place.id);
+                        }}
+                        disabled={place.isVisited}
+                      >
+                        삭제
+                      </Button>
                     </li>
                   )}
                 </Draggable>
