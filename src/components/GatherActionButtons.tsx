@@ -195,7 +195,7 @@ function getActionHandler(
     case "PLACE_EDIT":
       return () =>
         navigate((router, currentPath) => {
-          router.push(`${currentPath}/place/edit`);
+          router.push(`${currentPath}/place`);
         });
     case "COST_EDIT":
       return () =>
