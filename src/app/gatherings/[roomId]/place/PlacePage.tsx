@@ -1,8 +1,11 @@
 "use client";
 
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import { headerLayoutState } from "@/state/atom";
+import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Button } from "react-bootstrap";
+import { useSetRecoilState } from "recoil";
+import { usePathname } from "next/navigation";
 
 interface PlaceData {
   id: string;
@@ -23,6 +26,9 @@ const reorder = (
 };
 
 export default function PlacePage() {
+  const setHeaderLayoutState = useSetRecoilState(headerLayoutState);
+  const backUrl = usePathname().replace(/\/place$/, "");
+
   const [places, setPlaces] = useState<PlaceData[]>([
     {
       id: "11",
@@ -38,6 +44,13 @@ export default function PlacePage() {
     },
   ]);
   const [placeName, setPlaceName] = useState("");
+  useEffect(() => {
+    // 페이지가 로드되었을 때 헤더 상태 설정
+    setHeaderLayoutState({
+      backButtonUrlLink: backUrl,
+      title: "장소 관리",
+    });
+  }, [setHeaderLayoutState]); // 의존성 배열에 상태 설정 함수 추가
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPlaceName(e.target.value);
