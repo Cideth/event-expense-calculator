@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import CostGroupPage from "./CostGroupPage";
 
 export const metadata: Metadata = {
   title: "비용목록 확인",
@@ -6,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <></>;
+  return (
+    <>
+      <CostGroupPage />
+    </>
+  );
 }
