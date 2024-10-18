@@ -108,3 +108,23 @@ export const setActionButtonSettingData: GatherActionbuttonProps = {
 };
 
 export const roomIdPageTestData = {};
+export const costGroupTestData = [
+  {
+    id: "11",
+    ord: 0,
+    placeName: "장소1",
+    totalCost: 0,
+  },
+  {
+    id: "21",
+    ord: 1,
+    totalCost: 0,
+    placeName: "장소2",
+  },
+  {
+    id: "21",
+    ord: 1,
+    totalCost: 30000,
+    placeName: null,
+  },
+];
