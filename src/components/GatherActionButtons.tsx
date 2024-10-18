@@ -200,7 +200,7 @@ function getActionHandler(
     case "COST_EDIT":
       return () =>
         navigate((router, currentPath) => {
-          router.push(`${currentPath}/cost/edit`);
+          router.push(`${currentPath}/cost`);
         });
     case "GATHER_START":
       return () => alert("Gathering started!");
