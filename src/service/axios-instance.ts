@@ -1,5 +1,13 @@
-import axios, { AxiosInstance } from "axios";
+import axios, {
+  AxiosInstance,
+  AxiosInterceptorManager,
+  InternalAxiosRequestConfig,
+} from "axios";
 
-const api: AxiosInstance = axios.create({
+const serverApi: AxiosInstance = axios.create({
+  baseURL: "",
+});
+
+const clientApi: AxiosInstance = axios.create({
   baseURL: "",
 });
