@@ -9,7 +9,7 @@ export interface FriendShip extends Friend {
 }
 export type FriendList = Friend[];
 
-export type RoomStatus = "start" | "wait" | "end";
+export type RoomStatus = "START" | "END" | "WAIT";
 
 export type TimeLineEventType =
   | "GATHER_START"
