@@ -35,23 +35,23 @@ const actionButtons: {
 };
 
 const hostActionButtonsInfo: { [key in RoomStatus]: ActionButtonType[] } = {
-  wait: [
+  WAIT: [
     "GATHER_START", // 모임 시작
     "COST_EDIT",
     "PLACE_EDIT",
   ],
-  start: [
+  START: [
     "GETHER_END", // 모임 종료
     "PLACE_EDIT", // 장소 관리
     "COST_EDIT", // 비용 관리
   ],
-  end: ["SETTLEMENT_CHECK"],
+  END: ["SETTLEMENT_CHECK"],
 };
 
 const attendeeActionButtonsInfo: { [key in RoomStatus]: ActionButtonType[] } = {
-  wait: ["DRINKING_YES_NO"],
-  start: ["CHECK_IN_OUT", "DRINKING_YES_NO"],
-  end: ["SETTLEMENT_CHECK"],
+  WAIT: ["DRINKING_YES_NO"],
+  START: ["CHECK_IN_OUT", "DRINKING_YES_NO"],
+  END: ["SETTLEMENT_CHECK"],
 };
 
 // gatheractionbuttons props = RoomStatus, IsAttendPlace, IsAdmin
