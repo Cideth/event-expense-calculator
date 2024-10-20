@@ -103,7 +103,7 @@ export const testTimeLineData: Array<TimelineItemProps> = [
 export const setActionButtonSettingData: GatherActionbuttonProps = {
   isCheckedIn: true,
   isDrinking: true,
-  roomStatus: "start",
+  roomStatus: "START",
   isHost: true,
 };
 
