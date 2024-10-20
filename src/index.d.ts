@@ -9,9 +9,9 @@ export interface FriendShip extends Friend {
 }
 export type FriendList = Friend[];
 
-type RoomStatus = "start" | "wait" | "end";
+export type RoomStatus = "start" | "wait" | "end";
 
-type TimeLineEventType =
+export type TimeLineEventType =
   | "GATHER_START"
   | "GATHER_END"
   | "DRINKING"
@@ -62,13 +62,13 @@ export type HeaderLayoutStateType = {
   additionalComponentProps?: Record<string, any>;
 };
 
-interface IconTimelineItemProps {
+export interface IconTimelineItemProps {
   text: string;
   time: string;
   event?: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
 }
 
-interface ModalConfig {
+export interface ModalConfig {
   isOpen: boolean;
   message: string;
   onConfirm: () => void;
