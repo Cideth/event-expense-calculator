@@ -45,15 +45,14 @@ export enum GatheringNotificationEnum {
   LocationMoved = "Meeting Location Moved",
   AutomaticallyEnded = "Meeting Automatically Ended",
 }
-export interface Gathering {
-  roomId: number;
-  roomStatus: roomStatusType;
-  image: string | null;
-  roomName: string;
-  participants: FriendList | [];
-  lastNotificate: TimeLineEventType;
+export interface GatheringsInfo {
+  gatherId: number;
+  image_link: string | null;
+  status: RoomStatus;
+  title: string;
+  entry_count: number; // 모임 총 인원
+  lastNotiifcate: TimeLineEventType | null;
 }
-export type GatheringList = Gathering[];
 
 export type HeaderLayoutStateType = {
   title?: string;

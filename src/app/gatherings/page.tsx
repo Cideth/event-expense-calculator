@@ -1,19 +1,19 @@
 "use client";
 import { Container, Image } from "react-bootstrap";
-import { Gathering, GatheringList } from "@/index";
+import { GatheringsInfo } from "@/index";
 import { useRouter } from "next/navigation";
 import { useSetRecoilState } from "recoil";
 import { HeaderLayoutStateType } from "@/index";
 import { headerLayoutState } from "@/state/atom";
 import { useEffect } from "react";
-const testFriendData: GatheringList = [
+const testFriendData: GatheringsInfo[] = [
   {
-    roomId: "10",
-    roomStatus: "wait",
-    image: "",
-    roomName: "술후딱먹고헤어지는방",
-    participants: [],
-    lastNotificate: "CHECK_IN",
+    gatherId: 10,
+    image_link: null,
+    status: "WAIT",
+    title: "술후딱먹고헤어지는방",
+    entry_count: 10,
+    lastNotiifcate: null,
   },
 ];
 
@@ -33,16 +33,16 @@ export default function Page() {
         className=" p-3 py-0 bg-body rounded shadow-sm"
         style={{ cursor: "pointer" }}
       >
-        {testFriendData.map((row: Gathering) => (
+        {testFriendData.map((row: GatheringsInfo) => (
           <div
-            key={row.roomId}
+            key={row.gatherId}
             className="d-flex text-muted pt-3 pe-auto"
-            onClick={() => router.push(`/gatherings/${row.roomId}`)}
+            onClick={() => router.push(`/gatherings/${row.gatherId}`)}
           >
             <Image
               alt="profile image"
               className="bd-placeholder-img flex-shrink-0 me-2 rounded"
-              src={row.image || "/test.png"}
+              src={row.image_link || "/test.png"}
               style={{
                 width: "10vw",
                 height: "10vw",
@@ -57,13 +57,13 @@ export default function Page() {
               style={{ minHeight: "3.5em", alignContent: "center" }}
             >
               <div className="d-flex justify-content-between">
-                <strong className="text-gray-dark fs-4">{row.roomName}</strong>
+                <strong className="text-gray-dark fs-4">{row.title}</strong>
               </div>
               <span
                 className="d-block fs-5"
                 // 높이를 일정하게 유지
               >
-                {row.roomStatus || ""}
+                {row.status || ""}
               </span>
             </div>
           </div>
