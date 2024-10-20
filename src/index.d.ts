@@ -46,7 +46,7 @@ export enum GatheringNotificationEnum {
   AutomaticallyEnded = "Meeting Automatically Ended",
 }
 export interface Gathering {
-  roomId: string;
+  roomId: number;
   roomStatus: roomStatusType;
   image: string | null;
   roomName: string;
