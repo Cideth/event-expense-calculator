@@ -1,8 +1,7 @@
 "use client";
 import GatherActionButtons from "@/components/GatherActionButtons";
 import PlaceSummary from "@/components/PlaceSummary";
-import TimelineItem from "@/components/TimelineItem";
-import { TimeLineEventType } from "@/index";
+import { Timeline, TimeLineEventType } from "@/index";
 import { headerLayoutState, sidebarState } from "@/state/atom";
 import { useEffect, useRef } from "react";
 import { Container } from "react-bootstrap";
@@ -28,11 +27,12 @@ import GatherUserList from "./GatherUserList";
 import { setActionButtonSettingData, testTimeLineData } from "./testdata";
 
 import { TbCurrencyDollarOff } from "react-icons/tb";
+import TimelineItem from "@/components/TimelineItem";
 
 export default function GatheringRoomPage({
   timelineData,
 }: {
-  timelineData: Array<TimelineItemProps>;
+  timelineData: Array<Timeline>;
 }) {
   timelineData = testTimeLineData;
   const setHeaderLayoutState = useSetRecoilState(headerLayoutState);
@@ -73,7 +73,7 @@ export default function GatheringRoomPage({
           // previousPlace="집"
           startTime="15:00"
           endTime="18:00"
-          roomStatus="wait"
+          roomStatus="WAIT"
           currentPlace="명동 맛집"
         />
         <div className="flex-grow-1 overflow-y-auto p-3 bg-body-tertiary">
@@ -96,19 +96,12 @@ export default function GatheringRoomPage({
   );
 }
 
-export interface TimelineItemProps {
-  event_type: TimeLineEventType;
-  text: string;
-  time: string;
-  event?: JSX.Element | undefined | any;
-}
-
 function TimelineItemFactory({
   event_type,
   text,
   time,
   event,
-}: TimelineItemProps): JSX.Element {
+}: Timeline): JSX.Element {
   const eventItem = timeLineEvents.find((item) => item.type === event_type);
 
   if (eventItem) {

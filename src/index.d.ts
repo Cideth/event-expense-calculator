@@ -4,9 +4,11 @@ export interface Friend {
   image: string | null;
   name: string;
 }
+
 export interface FriendShip extends Friend {
-  myFreinds: Friend[];
+  myFriends: Friend[];
 }
+
 export type FriendList = Friend[];
 
 export type RoomStatus = "START" | "END" | "WAIT";
@@ -29,12 +31,7 @@ export type TimeLineEventType =
   | "COST_REMOVE"
   | "COST_CHANGE";
 
-// Flag 코드 컬럼
-// A 학생, B는 선생
-
-// A 타입을 받았다 -> 클라이언트에서는 Typescript로 어떻게 처리를 하는게 좋을까
-// 마지막 Notificate 의 타입에 따라서 화면에 표시되어야 할게 달라짐.
-
+// Notification types
 export enum GatheringNotificationEnum {
   Attendance = "Meeting Attendance",
   AttendanceCancellation = "Meeting Attendance Cancellation",
@@ -45,13 +42,33 @@ export enum GatheringNotificationEnum {
   LocationMoved = "Meeting Location Moved",
   AutomaticallyEnded = "Meeting Automatically Ended",
 }
-export interface GatheringsInfo {
+
+export interface Gathering {
   gatherId: number;
-  image_link: string | null;
+  imageLink: string | null; // corrected to camel case
   status: RoomStatus;
   title: string;
-  entry_count: number; // 모임 총 인원
-  lastNotiifcate: TimeLineEventType | null;
+  expectedStartTime: string; // corrected to camel case
+  costType: string; // corrected to camel case
+  creator: number;
+}
+
+export interface GatheringRegistration {
+  image: string | null;
+  title: string;
+  expectedStartTime: string; // corrected to camel case
+  costType: string; // corrected to camel case
+}
+
+export interface GatheringsInfo {
+  gatherId: number;
+  imageLink: string | null; // corrected to camel case
+  status: RoomStatus;
+  title: string;
+  entryCount: number; // corrected to camel case
+  lastNotification: TimeLineEventType | null; // corrected to camel case
+  createdAt: string; // corrected to camel case
+  updatedAt: string | null; // corrected to camel case
 }
 
 export type HeaderLayoutStateType = {
@@ -72,4 +89,12 @@ export interface ModalConfig {
   message: string;
   onConfirm: () => void;
   onCancel: () => void;
+}
+
+export interface Timeline {
+  eventType: TimeLineEventType; // corrected to camel case
+  gatheringInfoId: number; // corrected to camel case
+  text: string;
+  time: string;
+  event?: undefined | any; // keep as is, unless changing `event` naming too
 }
